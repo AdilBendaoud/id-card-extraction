@@ -28,7 +28,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           content: Text("Email verified successfully!"),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
+              onPressed: () => Navigator.pushReplacementNamed(context, '/signin'),
               child: Text("OK"),
             ),
           ],

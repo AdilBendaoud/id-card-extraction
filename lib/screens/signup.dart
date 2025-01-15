@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:mobile_app/screens/signin.dart';
 import 'package:mobile_app/services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {

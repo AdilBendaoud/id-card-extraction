@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:mobile_app/auth_check.dart';
 import 'package:mobile_app/screens/signin.dart';
 import 'package:mobile_app/screens/signup.dart';
 import 'package:mobile_app/screens/verify_email.dart';
@@ -22,12 +23,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/signin',
+      initialRoute: '/auth-check',
       routes: {
-        '/signin': (context) => SignInScreen(camera: camera),
-        '/signup': (context) => SignUpScreen(),
+        '/auth-check': (context) => AuthCheck(),
+        '/signin': (context) => const SignInScreen(),
+        '/signup': (context) => const SignUpScreen(),
         '/capture': (context) => CaptureScreen(camera: camera),
-        '/verify-email': (context) => VerifyEmailScreen(),
+        '/verify-email': (context) => const VerifyEmailScreen(),
       },
     );
   }

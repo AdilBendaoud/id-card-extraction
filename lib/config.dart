@@ -1,3 +1,3 @@
 class Appconfig{
-  static const String baseUrl = "http://localhost:8080";
+  static const String baseUrl = "http://192.168.1.11:8080";
 }

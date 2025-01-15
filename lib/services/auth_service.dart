@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobile_app/config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final String baseUrl = '${Appconfig.baseUrl}/api/auth';
@@ -29,7 +30,17 @@ class AuthService {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'password': password}),
     );
-    return response.statusCode == 200;
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      final token = responseData['token'];
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('jwt', token);
+
+      return true;
+    }
+    return false;
   }
 
   Future<bool> verifyEmail(String email, String otpCode) async {
@@ -40,5 +51,32 @@ class AuthService {
       body: jsonEncode({'email': email, 'otpCode': otpCode}),
     );
     return response.statusCode == 200;
+  }
+
+  Future<bool> forgotPassword(String email) async {
+    final url = Uri.parse('$baseUrl/forgot-password?email=$email');
+    final response = await http.post(url);
+
+    return response.statusCode == 200;
+  }
+
+  Future<bool> resetPassword(String token, String newPassword, String confirmPassword) async {
+    final url = Uri.parse('$baseUrl/reset-password?token=$token');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'newPassword': newPassword, 'confirmNewPassword': confirmPassword}),
+    );
+    return response.statusCode == 200;
+  }
+
+  Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('jwt');
+  }
+
+  Future<void> signOut() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('jwt');
   }
 }

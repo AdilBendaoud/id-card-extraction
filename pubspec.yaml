@@ -16,6 +16,10 @@ dependencies:
   provider: ^6.1.2
   cupertino_icons: ^1.0.2
   animate_do: ^3.1.2
+  shared_preferences: ^2.3.3
+  pdf: ^3.11.1
+  file_picker: ^8.1.7
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

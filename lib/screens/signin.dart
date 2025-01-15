@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:mobile_app/screens/forgot_password_screen.dart';
 import 'package:mobile_app/screens/signup.dart';
 import 'package:mobile_app/services/auth_service.dart';
-import 'package:camera/camera.dart';
 
 class SignInScreen extends StatefulWidget {
-  final CameraDescription camera;
-
-  const SignInScreen({super.key, required this.camera});
+  const SignInScreen({super.key});
 
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -98,7 +96,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: FadeInUp(
                       duration: Duration(milliseconds: 1300),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/images/clock.png'),
                           ),
@@ -108,10 +106,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   Positioned(
                     child: FadeInUp(
-                      duration: Duration(milliseconds: 1600),
+                      duration: const Duration(milliseconds: 1600),
                       child: Container(
-                        margin: EdgeInsets.only(top: 50),
-                        child: Center(
+                        margin: const EdgeInsets.only(top: 50),
+                        child: const Center(
                           child: Text(
                             "Login",
                             style: TextStyle(
@@ -227,6 +225,26 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                       child: const Text(
                         "Don't have an account? Sign Up",
+                        style: TextStyle(
+                          color: Color.fromRGBO(143, 148, 251, 1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  FadeInUp(
+                    duration: Duration(milliseconds: 2000),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgotPasswordScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Forgot password ?",
                         style: TextStyle(
                           color: Color.fromRGBO(143, 148, 251, 1),
                         ),
